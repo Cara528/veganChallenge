@@ -12,7 +12,7 @@ var progress: CGFloat = 0
 
 var percentage: Int = 0
 
-struct SecondView: View {
+struct ProgressView: View {
     
     let days = [
         
@@ -67,7 +67,7 @@ struct SecondView: View {
                 ScrollView {
                     LazyVGrid(columns: columns) {
                         ForEach(days.indices, id: \.self) { item in
-                            NavigationLink(destination: ChallengeView(day: days[item])){
+                            NavigationLink(destination: Challenge1View(day: days[item])){
                                 DailyView(day: days[item])
                             }
                         }
@@ -100,5 +100,5 @@ struct DailyView: View {
 
 
 #Preview {
-    SecondView()
+    ProgressView()
 }
