@@ -11,20 +11,20 @@ struct HomeView: View {
     @State private var challengeCompleted = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 30) {
             
             Text("Hi, Cara 👋")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text("你的選擇")
                     .font(.title)
                 Text("改變世界的一點 🌍")
                     .font(.title)
             }
 
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 18) {
                 Text("Day3 任務")
                     .font(.headline)
                 HStack {

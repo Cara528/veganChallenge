@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ChallengeView: View {
     
-    
     @State private var missionCompleted: [Bool] = Array(repeating: false, count: 7)
     
     let challenges: [String] = [
@@ -39,6 +38,7 @@ struct ChallengeView: View {
                             
                             HStack {
                                 Text(challenges[index])
+                                    .fontWeight(.medium)
                                 
                                 Spacer()
                                 
@@ -63,8 +63,8 @@ struct ChallengeView: View {
             Spacer()
         }
         .padding(.horizontal, 20)
-        .background(Color.green.opacity(0.2))
-
+        .background(Color(hex: "#B0DB9C").opacity(0.8))
+        .ignoresSafeArea()
     }
 }
 
