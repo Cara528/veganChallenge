@@ -19,12 +19,12 @@
 import SwiftUI
 
 @main
-struct PushTestApp: App {
+struct Vegan7daysApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
-            SettingView()
+            ContentView()
         }
     }
 }

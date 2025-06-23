@@ -12,25 +12,63 @@ struct SettingView: View {
     var body: some View {
         
         VStack(alignment: .leading, spacing: 30) {
-            Text("設定")
-                .font(.largeTitle)
-                .bold()
             
-            Button("啟用推播") {
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-                    if granted {
+            Text("設定頁")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            
+            VStack(alignment: .center, spacing: 20) {
+                
+                Image(systemName: "bell.fill")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundColor(.yellow)
+                
+                Text("啟用推播")
+                    .font(.title3)
+                
+                Text("每天收到最新任務")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                
+                Button(action: {
+                    //把啟用推播功能加進來
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in if granted {
                         DispatchQueue.main.asyncAfter(deadline: .now()+4) {
                             self.weeklyNotification()
                         }
                     } else {
-                        print("❌ 使用者未授權通知")
-                    }
-                }
+                        print("使用者未授權")
+                    }}
+                }) {
+                    
+                    Text("啟用")
+                        .padding(10)
+                        .foregroundColor(.black)
+                        .background(Color.blue.opacity(0.1))
+                        .cornerRadius(8)
 
+                }
             }
+            .padding()
+            .frame(maxWidth: .infinity)
+
+            .background(Color.white.opacity(0.85))
+//            .border(Color.black, width: 3)
+            .cornerRadius(12)
+            .shadow(color: Color.green.opacity(0.3), radius: 5, x: 0, y: 3)
+
+
+
+            
+            Spacer()
+
                 
         }
-//        .frame(minWidth: .infinity)
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(Color(hex: "#D3ECCD"))
+        .cornerRadius(12)
     }
     
     func weeklyNotification() {
@@ -62,3 +100,5 @@ struct SettingView: View {
 #Preview {
     SettingView()
 }
+
+
