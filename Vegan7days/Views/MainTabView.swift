@@ -22,6 +22,7 @@ struct MainTabView: View {
                     Text("Progress")
                 }
             
+            
             ChallengeView()
                 .tabItem {
                     Image(systemName: "list.bullet.rectangle")

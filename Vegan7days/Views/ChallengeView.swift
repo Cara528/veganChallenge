@@ -23,11 +23,14 @@ struct ChallengeView: View {
     ]
     
     var body: some View {
+        
     
         VStack(alignment: .leading) {
             Text("任務清單")
                 .font(.largeTitle)
                 .fontWeight(.bold)
+                .padding(.top, 60) // 增加上邊距
+
             
             ScrollView {
                 VStack(spacing: 20) {

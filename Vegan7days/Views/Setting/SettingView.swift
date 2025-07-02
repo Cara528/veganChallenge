@@ -9,13 +9,48 @@ import SwiftUI
 import UserNotifications
 
 struct SettingView: View {
+    
+    @State private var selectedUIImage: UIImage? = nil
+    @State private var isShowingImagePicker = false
+    
+    
+
+    
+    @State private var profileImage: Image? = nil
+    
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 30) {
+        VStack(alignment: .center, spacing: 30) {
             
             Text("設定頁")
                 .font(.largeTitle)
                 .fontWeight(.bold)
+            
+            Button(action: {
+                isShowingImagePicker = true
+            }) {
+                
+                if let profileImage = profileImage {
+                    
+                    profileImage
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 10))
+                    
+                } else {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                        .shadow(radius: 0.5)
+                }
+            }
+            
+            
             
             VStack(alignment: .center, spacing: 20) {
                 
@@ -25,10 +60,11 @@ struct SettingView: View {
                     .foregroundColor(.yellow)
                 
                 Text("啟用推播")
-                    .font(.title3)
+                    .font(.title2)
+                
                 
                 Text("每天收到最新任務")
-                    .font(.subheadline)
+                    .font(.title3)
                     .foregroundColor(.gray)
                 
                 Button(action: {
@@ -59,8 +95,6 @@ struct SettingView: View {
             .shadow(color: Color.green.opacity(0.3), radius: 5, x: 0, y: 3)
 
 
-
-            
             Spacer()
 
                 
@@ -69,6 +103,17 @@ struct SettingView: View {
         .padding()
         .background(Color(hex: "#D3ECCD"))
         .cornerRadius(12)
+        
+        .sheet(isPresented: $isShowingImagePicker) {
+            ImagePicker(selectedImage: $selectedUIImage)
+                .onDisappear {
+                    if let uiImage = selectedUIImage {
+                        profileImage = Image(uiImage: uiImage)
+                    }
+                }
+        }
+
+
     }
     
     func weeklyNotification() {
