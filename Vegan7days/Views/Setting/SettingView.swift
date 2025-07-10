@@ -10,11 +10,11 @@ import UserNotifications
 
 struct SettingView: View {
     
-    @State private var selectedUIImage: UIImage? = nil
-    @State private var isShowingImagePicker = false
-    
     
 
+    
+    @State private var selectedUIImage: UIImage? = nil
+    @State private var isShowingImagePicker = false
     
     @State private var profileImage: Image? = nil
     
@@ -49,8 +49,6 @@ struct SettingView: View {
                         .shadow(radius: 0.5)
                 }
             }
-            
-            
             
             VStack(alignment: .center, spacing: 20) {
                 
@@ -93,11 +91,15 @@ struct SettingView: View {
 //            .border(Color.black, width: 3)
             .cornerRadius(12)
             .shadow(color: Color.green.opacity(0.3), radius: 5, x: 0, y: 3)
-
+            .onAppear {
+                if let imageData = UserDefaults.standard.data(forKey: "profileImageData"),
+                   let uiImage = UIImage(data: imageData) {
+                    selectedUIImage = uiImage
+                    profileImage = Image(uiImage: uiImage)
+                }
+            }
 
             Spacer()
-
-                
         }
         .frame(maxWidth: .infinity)
         .padding()
@@ -109,12 +111,16 @@ struct SettingView: View {
                 .onDisappear {
                     if let uiImage = selectedUIImage {
                         profileImage = Image(uiImage: uiImage)
+                        
+                        // 存圖片到 UserDefaults
+                    if let imageData = uiImage.jpegData(compressionQuality: 0.8) {
+                        UserDefaults.standard.set(imageData, forKey: "profileImageData")
                     }
                 }
+            }
         }
-
-
     }
+    
     
     func weeklyNotification() {
         
