@@ -29,42 +29,52 @@ struct ChallengeView: View {
             Text("任務清單")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .padding(.top, 60) // 增加上邊距
+                .padding(.top, 55) // 增加上邊距
 
-            
-            ScrollView {
-                VStack(spacing: 20) {
-                    ForEach(challenges.indices, id: \.self) { index in
-                        VStack(alignment: .leading, spacing: 28) {
-                            Text("Day \(index + 1)")
-                                .font(.headline)
+            NavigationStack {
+                
+                ScrollView {
+                    VStack(spacing: 20) {
+                        ForEach(challenges.indices, id: \.self) { index in
                             
-                            HStack {
-                                Text(challenges[index])
-                                    .fontWeight(.medium)
+                            NavigationLink(destination: Challenge1View(day:challenges[index])) {
+                            
+                            VStack(alignment: .leading, spacing: 29) {
+                                Text("Day \(index + 1)")
+                                    .font(.headline)
                                 
-                                Spacer()
-                                
-                                Button(action: {
-                                    missionCompleted[index].toggle()
-                                }) {
-                                    Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
-                                        .font(.title3)
-                                        .foregroundColor(missionCompleted[index] ? .green : .gray)
+                                HStack {
+                                    Text(challenges[index])
+                                        .fontWeight(.medium)
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        missionCompleted[index].toggle()
+                                    }) {
+                                        Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
+                                            .font(.title3)
+                                            .foregroundColor(missionCompleted[index] ? .green : .gray)
+                                    }
                                 }
-                                .buttonStyle(PlainButtonStyle())
+                                    .buttonStyle(PlainButtonStyle())
+                                }
                             }
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color.white)
+                            .cornerRadius(16)
                         }
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color.white)
-                        .cornerRadius(16)
+                        
                     }
                 }
+                .background(Color(hex: "#B0DB9C").opacity(0.8))
+//                Spacer()
+                
+
             }
-            
-            Spacer()
         }
+        
         .padding(.horizontal, 20)
         .background(Color(hex: "#B0DB9C").opacity(0.8))
         .ignoresSafeArea()

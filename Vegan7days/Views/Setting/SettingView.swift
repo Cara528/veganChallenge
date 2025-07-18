@@ -10,9 +10,6 @@ import UserNotifications
 
 struct SettingView: View {
     
-    
-
-    
     @State private var selectedUIImage: UIImage? = nil
     @State private var isShowingImagePicker = false
     

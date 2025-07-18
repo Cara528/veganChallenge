@@ -45,19 +45,19 @@ struct Challenge1View: View {
                 .padding(.horizontal, 20)
             
             
-            Button(action: {
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    scaleEffect = 0.9
-                    progress += oneProgress
-                    percentage = Int(progress * 100)
-                    isFinish = true
-                    
-                }
-                withAnimation(.easeInOut(duration: 0.5).delay(0.2)) {
-                    scaleEffect = 1.0
-                }
-                
-            }) {
+//            Button(action: {
+//                withAnimation(.easeInOut(duration: 0.3)) {
+//                    scaleEffect = 0.9
+//                    progress += oneProgress
+//                    percentage = Int(progress * 100)
+//                    isFinish = true
+//                    
+//                }
+//                withAnimation(.easeInOut(duration: 0.5).delay(0.2)) {
+//                    scaleEffect = 1.0
+//                }
+//                
+//            }) {
                 HStack {
                     Image(systemName: "star")
                     Text("挑戰完成")
@@ -72,16 +72,16 @@ struct Challenge1View: View {
             }
 
         }
-        .navigationTitle("\(day) 挑戰")
-        .navigationBarTitleDisplayMode(.inline)
+//        .navigationTitle("\(day) 挑戰")
+//        .navigationBarTitleDisplayMode(.inline)
     }
     
     // 依照 day 來顯示不同的挑戰內容
     func getChallengeContent(for day: String) -> String {
         switch day {
-        case "DAY1":
+        case "踩點餐廳":
             return "踩點一間沒去過的Vegan餐廳，去吃個晚餐吧！"
-        case "DAY2":
+        case "邀請朋友吃素":
             return "邀請1位朋友or家人，一起去Vegan或素食餐廳吃飯"
         case "DAY3":
             return "到連鎖超市、商店尋找一款無動物實驗及成分的生活用品，洗髮精、洗面乳或保養品，提示：可以看看有沒有兔兔標章或是Vegan認證"
@@ -99,7 +99,7 @@ struct Challenge1View: View {
             return "未知的挑戰內容"
         }
     }
-}
+
 #Preview {
     Challenge1View(day: "DAY1")
 }
