@@ -14,7 +14,7 @@ var isFinish: Bool = false
 struct Challenge1View: View {
     
     @State private var scaleEffect: CGFloat = 1.0
-
+    @Environment(\.presentationMode) var presentationMode
     
     let day: String
     
@@ -28,8 +28,6 @@ struct Challenge1View: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
             
-//            GeometryReader { geometry in
-
                 Image("vegan_restaurant") // 這裡換成你的圖片名稱
                             .resizable()
                             .scaledToFill()
@@ -37,27 +35,12 @@ struct Challenge1View: View {
                             .cornerRadius(25)
                             .padding(.horizontal, 10)
 
-//            }
             Text(getChallengeContent(for: day))
                 .font(.title3)
                 .padding()
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
             
-            
-//            Button(action: {
-//                withAnimation(.easeInOut(duration: 0.3)) {
-//                    scaleEffect = 0.9
-//                    progress += oneProgress
-//                    percentage = Int(progress * 100)
-//                    isFinish = true
-//                    
-//                }
-//                withAnimation(.easeInOut(duration: 0.5).delay(0.2)) {
-//                    scaleEffect = 1.0
-//                }
-//                
-//            }) {
                 HStack {
                     Image(systemName: "star")
                     Text("挑戰完成")
@@ -70,10 +53,19 @@ struct Challenge1View: View {
                 .shadow(radius: 3)
                 .scaleEffect(scaleEffect)
             }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left")
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true)
 
         }
-//        .navigationTitle("\(day) 挑戰")
-//        .navigationBarTitleDisplayMode(.inline)
+        
     }
     
     // 依照 day 來顯示不同的挑戰內容

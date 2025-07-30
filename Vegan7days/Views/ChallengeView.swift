@@ -29,7 +29,7 @@ struct ChallengeView: View {
             Text("任務清單")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .padding(.top, 55) // 增加上邊距
+                .padding(.top, 55)
 
             NavigationStack {
                 
