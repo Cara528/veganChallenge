@@ -23,61 +23,65 @@ struct ChallengeView: View {
     ]
     
     var body: some View {
-        
-    
-        VStack(alignment: .leading) {
-            Text("任務清單")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.top, 55)
-
-            NavigationStack {
+        NavigationStack {
+        ZStack {
+            Color(hex: "#B0DB9C").opacity(0.8)
+                .ignoresSafeArea()
+            
+            VStack(alignment: .leading) {
+                Text("任務清單")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(.top, 55)
                 
-                ScrollView {
-                    VStack(spacing: 20) {
-                        ForEach(challenges.indices, id: \.self) { index in
-                            
-                            NavigationLink(destination: Challenge1View(day:challenges[index])) {
-                            
-                            VStack(alignment: .leading, spacing: 29) {
-                                Text("Day \(index + 1)")
-                                    .font(.headline)
+                    
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            ForEach(challenges.indices, id: \.self) { index in
                                 
-                                HStack {
-                                    Text(challenges[index])
-                                        .fontWeight(.medium)
+                                NavigationLink(destination: Challenge1View(day:challenges[index])) {
                                     
-                                    Spacer()
-                                    
-                                    Button(action: {
-                                        missionCompleted[index].toggle()
-                                    }) {
-                                        Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
-                                            .font(.title3)
-                                            .foregroundColor(missionCompleted[index] ? .green : .gray)
+                                    VStack(alignment: .leading, spacing: 29) {
+                                        Text("Day \(index + 1)")
+                                            .font(.headline)
+                                        
+                                        HStack {
+                                            Text(challenges[index])
+                                                .fontWeight(.medium)
+                                            
+                                            Spacer()
+                                            
+                                            Button(action: {
+                                                missionCompleted[index].toggle()
+                                            }) {
+                                                Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
+                                                    .font(.title3)
+                                                    .foregroundColor(missionCompleted[index] ? .green : .gray)
+                                            }
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
                                     }
                                 }
-                                    .buttonStyle(PlainButtonStyle())
-                                }
+                                .padding()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(Color.white)
+                                .cornerRadius(16)
                             }
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color.white)
-                            .cornerRadius(16)
+                            
                         }
-                        
                     }
+                    .padding(.horizontal, 20)
+//                    .padding(.horizontal, 20)
+//                    .background(Color(hex: "#B0DB9C").opacity(0.8))
+                    //                Spacer()
+                    
+                    
                 }
-                .background(Color(hex: "#B0DB9C").opacity(0.8))
-//                Spacer()
-                
-
             }
+            
+//            .background(Color(hex: "#B0DB9C").opacity(0.8))
+//            .ignoresSafeArea()
         }
-        
-        .padding(.horizontal, 20)
-        .background(Color(hex: "#B0DB9C").opacity(0.8))
-        .ignoresSafeArea()
     }
 }
 

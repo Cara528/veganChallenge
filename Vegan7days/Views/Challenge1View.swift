@@ -28,10 +28,10 @@ struct Challenge1View: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
             
-                Image("vegan_restaurant") // 這裡換成你的圖片名稱
+                Image("vegan_restaurant")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: UIScreen.main.bounds.width - 32, height: 450, alignment: .center) // 調整高度
+                            .frame(width: UIScreen.main.bounds.width - 32, height: 450, alignment: .center)
                             .cornerRadius(25)
                             .padding(.horizontal, 10)
 
@@ -68,7 +68,6 @@ struct Challenge1View: View {
         
     }
     
-    // 依照 day 來顯示不同的挑戰內容
     func getChallengeContent(for day: String) -> String {
         switch day {
         case "踩點餐廳":
