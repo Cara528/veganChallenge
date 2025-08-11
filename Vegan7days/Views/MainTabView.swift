@@ -11,28 +11,28 @@ struct MainTabView: View {
     var body: some View {
         TabView {
             HomeView()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
+            .tabItem {
+                Image(systemName: "house.fill")
+                Text("Home")
                 }
             
-            ProgressView()
-                .tabItem {
-                    Image(systemName: "chart.bar.fill")
-                    Text("Progress")
+            ProgressView(progress: 0.5)
+            .tabItem {
+                Image(systemName: "chart.bar.fill")
+                Text("Progress")
                 }
             
             
             ChallengeView()
-                .tabItem {
-                    Image(systemName: "list.bullet.rectangle")
-                    Text("Challenges")
+            .tabItem {
+                Image(systemName: "list.bullet.rectangle")
+                Text("Challenges")
                 }
             
             SettingView()
-                .tabItem {
-                    Image(systemName: "gearshape.fill")
-                    Text("Settings")
+            .tabItem {
+                Image(systemName: "gearshape.fill")
+                Text("Settings")
                 }
         }
         .accentColor(Color(hex: "#F16767"))

@@ -42,16 +42,23 @@ struct Challenge1View: View {
                 .padding(.horizontal, 20)
             
                 HStack {
-                    Image(systemName: "star")
-                    Text("挑戰完成")
+                    Button(action: {
+                        print("Done!")
+                    }){
+                        Image(systemName: "star")
+                        Text("挑戰完成")
+                    }
                 }
+                .frame(minWidth:0, maxWidth: .infinity)
+                .padding(.vertical, 20)
                 .font(.headline)
                 .foregroundColor(.white)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(10)
+                .background(Color.green)
+                .cornerRadius(35)
                 .shadow(radius: 3)
+                .padding()
                 .scaleEffect(scaleEffect)
+                
             }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

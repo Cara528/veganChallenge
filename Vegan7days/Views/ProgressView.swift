@@ -11,110 +11,36 @@ import SwiftUI
 
 struct ProgressView: View {
     
+    let progress: Double
+        
     var body: some View {
         
         VStack {
-            Text("hi")
+            
+            Text("目前進度")
+                .font(.title)
+            
+            ZStack {
+                Circle()
+                    .stroke(Color.gray.opacity(0.2), lineWidth: 12)
+                
+                // 進度圓圈
+                Circle()
+                    .trim(from: 0, to: progress)
+                    .stroke(Color.green, style:StrokeStyle(lineWidth: 12, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+                    .animation(.easeInOut, value: progress)
+                
+                // 百分比文字
+                Text("\(Int(progress * 100))%")
+                    .font(.title)
+                    .bold()
+            }
+            .frame(width: 150, height: 150)
         }
     }
 }
 
 #Preview {
-    ProgressView()
+    ProgressView(progress: 0.5)
 }
-//import SwiftUI
-//
-//var progress: CGFloat = 0
-//
-//var percentage: Int = 0
-//
-//struct ProgressView: View {
-//    
-//    let days = [
-//        
-//        "DAY1",
-//        "DAY2",
-//        "DAY3",
-//        "DAY4",
-//        "DAY5",
-//        "DAY6",
-//        "DAY7",
-//        "DAY8"
-//        
-//    ]
-//    
-//    var body: some View {
-//        
-//        VStack {
-//        
-//            HStack{
-//                Text("每日挑戰")
-//                    .font(.title)
-//                
-//                ZStack{
-//                    Circle()
-//                        .stroke(lineWidth: 10)
-//                        .opacity(0.3)
-//                        .foregroundColor(Color.gray)
-//                    
-//                    Circle()
-//                        .trim(from: 0.0, to: progress)
-//                        .stroke(
-//                            AngularGradient(gradient: Gradient(colors: [.purple, .red]), center: .center),
-//                            style: StrokeStyle(lineWidth: 8, lineCap: .round)
-//                        )
-//                        .rotationEffect(.degrees(-90))
-//                        
-//                    VStack{
-//                        Text("目前進度")
-//                            
-//                        
-//                        Text("\(percentage)%")
-//                            .bold()
-//                    }
-//
-//                }
-//                .frame(width: 100, height: 100)
-//            }
-//                
-//            NavigationStack {
-//                
-//                let columns = [GridItem(), GridItem()]
-//                ScrollView {
-//                    LazyVGrid(columns: columns) {
-//                        ForEach(days.indices, id: \.self) { item in
-//                            NavigationLink(destination: Challenge1View(day: days[item])){
-//                                DailyView(day: days[item])
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//struct DailyView: View {
-//    let day: String
-//    
-//    var body: some View {
-//        
-//            ZStack{
-//                Image(day)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width:200, height: 200)
-//                    .cornerRadius(10)
-//                
-//                Text(day)
-//                    .font(.system(size: 20))
-//                    .cornerRadius(10)
-//        }
-//    }
-//}
-//
-//
-//
-//#Preview {
-//    ProgressView()
-//}
