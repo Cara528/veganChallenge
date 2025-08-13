@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		17A3C1272E4B45850075119F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 17A3C1262E4B45850075119F /* Lottie */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		17D1801D2D6857FE004017BF /* Vegan7days.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vegan7days.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17A3C1272E4B45850075119F /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,19 +57,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17D1802B2D685800004017BF /* Build configuration list for PBXNativeTarget "Vegan7days" */;
 			buildPhases = (
-				17D180192D6857FE004017BF /* Sources */,
 				17D1801A2D6857FE004017BF /* Frameworks */,
 				17D1801B2D6857FE004017BF /* Resources */,
+				17A3C1302E4B47530075119F /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				17A3C12B2E4B46120075119F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				17D1801F2D6857FE004017BF /* Vegan7days */,
 			);
 			name = Vegan7days;
 			packageProductDependencies = (
+				17A3C1262E4B45850075119F /* Lottie */,
 			);
 			productName = Vegan7days;
 			productReference = 17D1801D2D6857FE004017BF /* Vegan7days.app */;
@@ -94,6 +101,9 @@
 			);
 			mainGroup = 17D180142D6857FE004017BF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				17A3C1252E4B45850075119F /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 17D1801E2D6857FE004017BF /* Products */;
 			projectDirPath = "";
@@ -115,7 +125,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		17D180192D6857FE004017BF /* Sources */ = {
+		17A3C1302E4B47530075119F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -123,6 +133,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17A3C12B2E4B46120075119F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 17A3C12A2E4B46120075119F /* Lottie */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		17D180292D685800004017BF /* Debug */ = {
@@ -328,6 +345,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		17A3C1252E4B45850075119F /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17A3C1262E4B45850075119F /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17A3C1252E4B45850075119F /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		17A3C12A2E4B46120075119F /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17A3C1252E4B45850075119F /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 17D180152D6857FE004017BF /* Project object */;
 }

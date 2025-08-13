@@ -16,12 +16,11 @@ struct MainTabView: View {
                 Text("Home")
                 }
             
-            ProgressView(progress: 0.5)
+            ProgressView()
             .tabItem {
                 Image(systemName: "chart.bar.fill")
                 Text("Progress")
                 }
-            
             
             ChallengeView()
             .tabItem {
