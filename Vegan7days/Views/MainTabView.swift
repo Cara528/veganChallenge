@@ -34,7 +34,7 @@ struct MainTabView: View {
                 Text("Settings")
                 }
         }
-        .accentColor(Color(hex: "#F16767"))
+        .accentColor(Color(hex: "#253900"))
     }
 }
 

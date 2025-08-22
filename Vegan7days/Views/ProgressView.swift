@@ -49,7 +49,7 @@ struct ProgressView: View {
                         HStack(spacing: 6) {
                             LottieView(filename: "PlantGrowing")
                                 .frame(width: 250, height: 250)
-//                            Text("每天澆一點水，習慣就會長大 🌱")
+
                         }
                         .foregroundStyle(.secondary)
                         .font(.subheadline)
@@ -85,40 +85,3 @@ struct ProgressView: View {
 #Preview {
     NavigationStack { ProgressView() }
 }
-
-
-//import SwiftUI
-//
-//struct ProgressView: View {
-//    
-//    let progress: Double
-//        
-//    var body: some View {
-//        
-//        VStack {
-//            
-//            Text("目前進度")
-//                .font(.title)
-//            
-//            ZStack {
-//                Circle()
-//                    .stroke(Color.gray.opacity(0.2), lineWidth: 12)
-//                
-//                Circle()
-//                    .trim(from: 0, to: progress)
-//                    .stroke(Color.green, style:StrokeStyle(lineWidth: 12, lineCap: .round))
-//                    .rotationEffect(.degrees(-90))
-//                    .animation(.easeInOut, value: progress)
-//                
-//                Text("\(Int(progress * 100))%")
-//                    .font(.title)
-//                    .bold()
-//            }
-//            .frame(width: 150, height: 150)
-//        }
-//    }
-//}
-//
-//#Preview {
-//    ProgressView(progress: 0.5)
-//}
