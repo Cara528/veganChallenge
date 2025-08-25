@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-private let brandPurple = Color(hex: "#7367F0")
+private let brandGreen = Color(hex: "#253900")
 
 // 卡片容器
 struct SettingsCard<Content: View>: View {
     @ViewBuilder var content: Content
     var body: some View {
         VStack(spacing: 0) { content }
-            .background(Color(.secondarySystemBackground))
+            .background(Color.white.opacity(0.5))
             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
             .shadow(color: .black.opacity(0.12), radius: 10, y: 4)
     }
@@ -63,10 +63,10 @@ struct SettingRow: View {
     private var icon: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(brandPurple.opacity(0.15))
+                .fill(brandGreen.opacity(0.15))
                 .frame(width: 36, height: 36)
             Image(systemName: systemIcon)
-                .foregroundStyle(brandPurple)
+                .foregroundStyle(brandGreen)
         }
     }
 }

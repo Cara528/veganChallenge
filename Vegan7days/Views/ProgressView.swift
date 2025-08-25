@@ -69,7 +69,7 @@ struct ProgressView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.green)
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
                         .shadow(radius: 3, y: 2)
                 }
                 .padding(.top, 8)
