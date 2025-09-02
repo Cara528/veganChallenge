@@ -45,6 +45,19 @@ struct ProgressView: View {
     
     var body: some View {
         ScrollView {
+            
+            ZStack {
+                
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(hex: "F1F8E8"),
+                        Color(hex: "C9E9D2")
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+            
             VStack(spacing: 24) {
                 Text("進度總覽")
                     .font(.title2).bold()
@@ -55,7 +68,7 @@ struct ProgressView: View {
                 HStack(spacing: 16) {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("小種子澆水灌溉中")
-                            .font(.headline)
+                            .font(.title2).bold()
                         HStack(spacing: 6) {
                             LottieView(filename: "PlantGrowing")
                                 .frame(width: 300, height: 300)
@@ -91,12 +104,12 @@ struct ProgressView: View {
             .padding(16)
         }
 //        .background(Color(.systemGroupedBackground).ignoresSafeArea())
-        .background(Color.green.opacity(0.2))
+//        .background(Color.green.opacity(0.2))
         .navigationTitle("Progress")
         .toolbarTitleDisplayMode(.inline)
     }
 }
-
+}
 #Preview {
     NavigationStack { ProgressView() }
 }

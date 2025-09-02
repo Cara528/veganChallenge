@@ -14,7 +14,7 @@ struct SettingsCard<Content: View>: View {
     @ViewBuilder var content: Content
     var body: some View {
         VStack(spacing: 0) { content }
-            .background(Color.white.opacity(0.5))
+            .background(Color.white.opacity(0.8))
             .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
             .shadow(color: .black.opacity(0.12), radius: 10, y: 4)
     }
