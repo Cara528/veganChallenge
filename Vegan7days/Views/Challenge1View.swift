@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct Challenge1View: View {
-    @Environment(\.dismiss) private var dismiss   // 取代 presentationMode（較新）
+    @Environment(\.dismiss) private var dismiss
     @State private var scaleEffect: CGFloat = 1.0
     let day: String
 
     var body: some View {
-        ScrollView { // ⬅︎ 避免小螢幕被擠爆
+        ScrollView {
             VStack(alignment: .leading, spacing: 16) {
 
                 Text("\(day) 挑戰")
@@ -22,20 +22,19 @@ struct Challenge1View: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 16)
 
-                // 用 GeometryReader 取得父寬，別用 UIScreen
                 GeometryReader { geo in
-                    let width = geo.size.width - 32 // 扣左右 16 padding
-                    let height = max(220, width * 0.55) // 依比例給高，最少 220
+                    let width = geo.size.width - 32
+                    let height = max(220, width * 0.55) 
 
                     Image("vegan_restaurant")
                         .resizable()
                         .scaledToFill()
                         .frame(width: width, height: height)
-                        .clipShape(RoundedRectangle(cornerRadius: 25)) // ⬅︎ 裁切避免溢出
+                        .clipShape(RoundedRectangle(cornerRadius: 25))
                         .shadow(radius: 3)
                         .padding(.horizontal, 16)
                 }
-                .frame(height: 260) // 給 GeometryReader 一個固定高度容器
+                .frame(height: 260)
 
                 Text(getChallengeContent(for: day))
                     .font(.title3)

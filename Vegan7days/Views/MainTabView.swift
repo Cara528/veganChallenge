@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    @State private var missionCompleted: [Bool] = Array(repeating: false, count: 7)
+
+    
     var body: some View {
         TabView {
             HomeView()
@@ -16,13 +20,10 @@ struct MainTabView: View {
                 Text("Home")
                 }
             
-            ProgressView()
-            .tabItem {
-                Image(systemName: "chart.bar.fill")
-                Text("Progress")
-                }
+            ProgressScreen(missionCompleted: $missionCompleted)
+                            .tabItem { Label("Progress", systemImage: "chart.bar.fill") }
             
-            ChallengeView()
+            ChallengeView(missionCompleted: $missionCompleted)
             .tabItem {
                 Image(systemName: "list.bullet.rectangle")
                 Text("Challenges")

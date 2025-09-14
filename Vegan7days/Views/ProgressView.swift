@@ -40,8 +40,17 @@ struct ProgressCircleView: View {
     }
 }
 
-struct ProgressView: View {
-    @State private var progress: Double = 0.5
+struct ProgressScreen: View {
+    
+    @Binding var missionCompleted: [Bool]
+    
+    private var progress: Double {
+        guard !missionCompleted.isEmpty else { return 0 }
+        let done = missionCompleted.filter { $0 }.count
+        return Double(done) / Double(missionCompleted.count)
+    }
+    
+//    @State private var progress: Double = 0.5
     
     var body: some View {
         ScrollView {
@@ -83,12 +92,10 @@ struct ProgressView: View {
                     Spacer()
                 }
                 .padding()
-                
-//                .background(Color(.secondarySystemBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 
                 NavigationLink {
-                    ChallengeView()
+                    ChallengeView(missionCompleted: $missionCompleted)
                 } label: {
                     Text("前往挑戰頁")
                         .font(.headline)
@@ -111,5 +118,5 @@ struct ProgressView: View {
 }
 }
 #Preview {
-    NavigationStack { ProgressView() }
+    ProgressScreen(missionCompleted: .constant(Array(repeating: true, count: 4)))
 }

@@ -10,8 +10,10 @@ import SwiftUI
 
 struct ChallengeView: View {
     
-    @State private var missionCompleted: [Bool] = Array(repeating: false, count: 7)
+    @Binding var missionCompleted: [Bool]
     
+//    @State var missionCompleted: [Bool] = Array(repeating: false, count: 7)
+//    
     let challenges: [String] = [
         "踩點餐廳",
         "邀請朋友吃素",
@@ -24,63 +26,74 @@ struct ChallengeView: View {
     
     var body: some View {
         NavigationStack {
-        ZStack {
-            Color(hex: "#B0DB9C").opacity(0.8)
-                .ignoresSafeArea()
-            
-            VStack(alignment: .leading) {
-                Text("任務清單")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.top, 55)
+            ZStack {
+                Color(hex: "#B0DB9C").opacity(0.8)
+                    .ignoresSafeArea()
                 
-                    
-                ScrollView {
-                    VStack(spacing: 20) {
-                        ForEach(challenges.indices, id: \.self) { index in
-                                
-                        NavigationLink(destination: Challenge1View(day:challenges[index])) {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("任務清單")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        //                    .padding(.top, 55)
+                        
+                        Spacer()
+                        
+                        NavigationLink {
+                                ProgressScreen(missionCompleted: $missionCompleted)
+                                            } label: {
+                                                Text("進度")
+                                                .font(.headline)
+                                                .padding(.horizontal, 12)
+                                                .padding(.vertical, 8)
+                                                .background(Color.white)
+                                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            }
+                                        }
+                                        .padding(.top, 55)
+                        
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            ForEach(challenges.indices, id: \.self) { index in
                                     
-                            VStack(alignment: .leading, spacing: 29) {
-                                    Text("Day \(index + 1)")
-                                        .font(.headline)
+                            NavigationLink(destination: Challenge1View(day:challenges[index])) {
                                         
-                                    HStack {
-                                        Text(challenges[index])
-                                        .fontWeight(.medium)
+                                    VStack(alignment: .leading, spacing: 29) {
+                                            Text("Day \(index + 1)")
+                                                .font(.headline)
                                             
-                                        Spacer()
-                                            
-                                        Button(action: {
-                                            missionCompleted[index].toggle()
-                                        }) {
-                                            Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
-                                                .font(.title3)
-                                                .foregroundColor(missionCompleted[index] ? .green : .gray)
+                                        HStack {
+                                            Text(challenges[index])
+                                            .fontWeight(.medium)
+                                                
+                                            Spacer()
+                                                
+                                            Button(action: {
+                                                missionCompleted[index].toggle()
+                                            }) {
+                                                Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
+                                                    .font(.title3)
+                                                    .foregroundColor(missionCompleted[index] ? .green : .gray)
                                             }
                                         }
                                         .buttonStyle(PlainButtonStyle())
                                     }
                                 }
                                 .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .frame(maxWidth: .infinity,alignment:.leading)
                                 .background(Color.white)
                                 .cornerRadius(16)
+                                }
                             }
-                            
                         }
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.horizontal, 20)
-                    
-                    
                 }
             }
-
         }
     }
-}
+
 
 #Preview {
-    ChallengeView()
+    ChallengeView(missionCompleted: .constant(Array(repeating: false, count: 7)))
 }
-
