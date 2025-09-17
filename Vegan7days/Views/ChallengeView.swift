@@ -12,8 +12,6 @@ struct ChallengeView: View {
     
     @Binding var missionCompleted: [Bool]
     
-//    @State var missionCompleted: [Bool] = Array(repeating: false, count: 7)
-//    
     let challenges: [String] = [
         "踩點餐廳",
         "邀請朋友吃素",
@@ -24,7 +22,19 @@ struct ChallengeView: View {
         "心得打卡"
     ]
     
+    let missions: [String: String] = [
+        "Day1":"踩點餐廳",
+        "Day2":"邀請朋友吃素",
+        "Day3":"連鎖店找一款無動實產品",
+        "Day4":"情境模擬練習：買新鞋",
+        "Day5":"情境模擬練習：好友過生日",
+        "Day6":"問答題：關於B12",
+        "Day7":"心得打卡"]
+    
+    var pairs: [(key: String, value: String)] { missions.sorted { $0.key.localizedStandardCompare($1.key) == .orderedAscending }}
+    
     var body: some View {
+        
         NavigationStack {
             ZStack {
                 Color(hex: "#B0DB9C").opacity(0.8)
@@ -40,30 +50,31 @@ struct ChallengeView: View {
                         Spacer()
                         
                         NavigationLink {
-                                ProgressScreen(missionCompleted: $missionCompleted)
-                                            } label: {
-                                                Text("進度")
-                                                .font(.headline)
-                                                .padding(.horizontal, 12)
-                                                .padding(.vertical, 8)
-                                                .background(Color.white)
-                                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                            ProgressScreen(missionCompleted: $missionCompleted)} label: {
+                                    Text("進度")
+                                    .font(.headline)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 8)
+                                    .background(Color.white)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
                                             }
                                         }
-                                        .padding(.top, 55)
+                                    .padding(.top, 55)
                         
                     ScrollView {
                         VStack(spacing: 20) {
-                            ForEach(challenges.indices, id: \.self) { index in
-                                    
-                            NavigationLink(destination: Challenge1View(day:challenges[index])) {
-                                        
+                            ForEach(Array(pairs.enumerated()), id: \.element.key) { index, pair in
+//                            ForEach(challenges.indices, id: \.self) { index in
+                            
+                                NavigationLink(destination: Challenge1View(day:pair.value, index: index)) {
+//                                NavigationLink(destination: Challenge1View(day:challenges[index])) {
+                              
                                     VStack(alignment: .leading, spacing: 29) {
                                             Text("Day \(index + 1)")
-                                                .font(.headline)
-                                            
+                                            .font(.headline)
+                                        
                                         HStack {
-                                            Text(challenges[index])
+                                            Text(pair.value)
                                             .fontWeight(.medium)
                                                 
                                             Spacer()
@@ -72,8 +83,8 @@ struct ChallengeView: View {
                                                 missionCompleted[index].toggle()
                                             }) {
                                                 Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
-                                                    .font(.title3)
-                                                    .foregroundColor(missionCompleted[index] ? .green : .gray)
+                                                .font(.title3)
+                                                .foregroundColor(missionCompleted[index] ? .green : .gray)
                                             }
                                         }
                                         .buttonStyle(PlainButtonStyle())
