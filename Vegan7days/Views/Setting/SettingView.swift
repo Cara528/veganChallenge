@@ -29,7 +29,7 @@ struct SettingView: View {
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .ignoresSafeArea()
+//            .ignoresSafeArea()
         
             VStack(alignment: .center, spacing: 30) {
                 

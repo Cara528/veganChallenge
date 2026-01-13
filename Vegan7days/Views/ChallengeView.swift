@@ -45,7 +45,7 @@ struct ChallengeView: View {
                         Text("任務清單")
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        //                    .padding(.top, 55)
+
                         
                         Spacer()
                         
@@ -63,10 +63,10 @@ struct ChallengeView: View {
                         
                     ScrollView {
                         VStack(spacing: 20) {
-                            ForEach(Array(pairs.enumerated()), id: \.element.key) { index, pair in
-//                            ForEach(challenges.indices, id: \.self) { index in
+                        ForEach(Array(pairs.enumerated()), id: \.element.key) { index, pair in
+
                             
-                                NavigationLink(destination: Challenge1View(day:pair.value, index: index)) {
+                            NavigationLink(destination: Challenge1View(day:pair.value, index: index)) {
 //                                NavigationLink(destination: Challenge1View(day:challenges[index])) {
                               
                                     VStack(alignment: .leading, spacing: 29) {

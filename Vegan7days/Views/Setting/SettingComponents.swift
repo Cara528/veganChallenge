@@ -9,7 +9,6 @@ import SwiftUI
 
 private let brandGreen = Color(hex: "#253900")
 
-// 卡片容器
 struct SettingsCard<Content: View>: View {
     @ViewBuilder var content: Content
     var body: some View {
@@ -20,7 +19,6 @@ struct SettingsCard<Content: View>: View {
     }
 }
 
-// 單列
 struct SettingRow: View {
     enum Accessory { case toggle(Binding<Bool>), chevron, none }
     let systemIcon: String

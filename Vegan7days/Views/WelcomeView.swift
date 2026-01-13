@@ -23,13 +23,14 @@ struct WelcomeView: View {
                 Button(action: {
                     showMainApp = true
                         }) {
-                    Text("旅程開始！")
-                        .font(.largeTitle)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
+                            Text("旅程開始")
+                                .font(.system(size: 18, weight: .bold))
+                                .frame(width: 340, height: 50)
+                                .foregroundStyle(.white)
+                                .background(Color(hex: "53B175"))
+                                .cornerRadius(16)
                         }
+                        .padding(.bottom, 16)
                     }
                 }
             }
