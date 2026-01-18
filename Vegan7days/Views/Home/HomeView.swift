@@ -22,9 +22,8 @@ struct HomeView: View {
                 startPoint: .top,
                 endPoint: .bottom
             )
-//            .ignoresSafeArea()
             
-            VStack(alignment: .leading, spacing: 30) {
+            VStack(alignment: .leading, spacing: 20) {
 
                 // 🔹 Header 區塊
                 VStack(alignment: .leading, spacing: 24) {
@@ -43,11 +42,12 @@ struct HomeView: View {
                     }
                 }
                 .padding(.top, 20)
-
-                // 🔹 今日任務卡片
+                
+                Text("今日任務")
+                    .font(.system(size: 22, weight: .medium))
+                
                 VStack(alignment: .leading, spacing: 18) {
-                    Text("今日任務")
-                        .font(.title2)
+
 
                     Text("邀請朋友到素食餐廳")
                         .font(.title3)
@@ -75,51 +75,6 @@ struct HomeView: View {
             }
             .padding()
 
-//            VStack(alignment: .leading, spacing: 30) {
-//                
-//                Text("Hello, Cara 👋!")
-//                    .font(.title)
-//                
-//                VStack(alignment: .leading, spacing: 8) {
-//                    Text("你的選擇")
-//                        .font(.largeTitle)
-//                    //                    .fontWeight(.bold)
-//                    
-//                    Text("改變世界的一點 🌍")
-//                        .font(.largeTitle)
-//                    //                    .fontWeight(.bold)
-//                    
-//                }
-//                
-//                VStack(alignment: .leading, spacing: 18) {
-//                    Text("今日任務")
-//                        .font(.title2)
-//                    Text("邀請朋友到素食餐廳")
-//                        .font(.title3)
-//                    HStack {
-//                        Text(challengeCompleted ? "✅ 已完成" : "🔄 正在進行中")
-//                        Spacer()
-//                        Button(action: {
-//                            challengeCompleted.toggle()
-//                        }) {
-//                            Text(challengeCompleted ? "還原" : "完成")
-//                                .font(.caption)
-//                                .padding(6)
-//                                .background(Color.blue.opacity(0.1))
-//                                .cornerRadius(8)
-//                        }
-//                    }
-//                }
-//                .padding()
-//                .frame(maxWidth: .infinity)
-//                .background(Color.white)
-//                .cornerRadius(16)
-//                
-//                Spacer()
-//            }
-//            
-//            .padding()
-            
         }
     }
 }
