@@ -4,7 +4,156 @@
 //
 //  Created by Cara Hsu on 2025/6/14.
 //
-
+//
+//import SwiftUI
+//import UserNotifications
+//
+//struct SettingView: View {
+//    
+//    @State private var selectedUIImage: UIImage? = nil
+//    @State private var isShowingImagePicker = false
+//    @State private var profileImage: Image? = nil
+//    
+//    @State private var notifOn: Bool = false
+//    
+//    var body: some View {
+////        ScrollView {
+//            
+//        ZStack {
+//            
+//            LinearGradient(
+//                gradient: Gradient(colors: [
+//                    Color(hex: "F1F8E8"),
+//                    Color(hex: "C9E9D2")
+//                ]),
+//                startPoint: .top,
+//                endPoint: .bottom
+//            )
+////            .ignoresSafeArea()
+//        
+//            VStack(alignment: .center, spacing: 30) {
+//                
+//                Text("個人化設定")
+//                    .font(.largeTitle)
+//                    .fontWeight(.bold)
+//                
+//                Button(action: {
+//                    isShowingImagePicker = true
+//                }) {
+//                    
+//                    if let profileImage = profileImage {
+//                        
+//                        profileImage
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fill)
+//                            .frame(width: 120, height: 120)
+//                            .clipShape(Circle())
+//                            .overlay(Circle().stroke(Color.white, lineWidth: 3))
+//                        
+//                    } else {
+//                        Image(systemName: "person.circle.fill")
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fill)
+//                            .frame(width: 100, height: 100)
+//                            .clipShape(Circle())
+//                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+//                            .shadow(radius: 0.5)
+//                    }
+//                }
+//                
+//                
+//                VStack(alignment: .leading, spacing: 12) {
+//                        Text("General")
+//                        .font(.footnote).foregroundStyle(.secondary)
+//                        .padding(.leading, 4)
+//                    
+//                    SettingsCard {
+//                        SettingRow(systemIcon: "bell", title: "Notification", accessory: .toggle($notifOn))
+//                            .onChange(of: notifOn) { newValue in
+//                                if newValue {
+//                                    //把啟用推播功能加進來
+//                                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in if granted {
+//                                        DispatchQueue.main.asyncAfter(deadline: .now()+4) {
+//                                            self.weeklyNotification()
+//                                        }
+//                                    } else {
+//                                        print("使用者未授權")
+//                                    }}
+//                                }
+//                            }
+//                        
+//                        SettingRow(systemIcon: "person", title: "Accounts") {
+//                            print("Go Account")
+//                        }
+//                        
+//                        SettingRow(systemIcon: "banknote", title: "30天計劃") {
+//                            print("付款頁面")
+//                        }
+//                    }
+//                    
+//                    }
+//                
+//                Spacer(minLength: 24)
+//            }
+//            .frame(maxWidth: .infinity)
+//            .padding()
+////            .background(Color(hex: "#D3ECCD"))
+//            .cornerRadius(12)
+//            
+//            .sheet(isPresented: $isShowingImagePicker) {
+//                ImagePicker(selectedImage: $selectedUIImage)
+//                    .onDisappear {
+//                        if let uiImage = selectedUIImage {
+//                            profileImage = Image(uiImage: uiImage)
+//                            
+//                            // 存圖片到 UserDefaults
+//                            if let imageData = uiImage.jpegData(compressionQuality: 0.8) {
+//                                UserDefaults.standard.set(imageData, forKey: "profileImageData")
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    
+//    func weeklyNotification() {
+//        
+//        //Content
+//        let content = UNMutableNotificationContent()
+//        content.title = "🌱Vegan小挑戰來囉！"
+//        content.body = "一點點改變，就是很棒的堅持！"
+//        content.interruptionLevel = .active
+//        
+//        //Trigger
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//        
+//        //Request
+//        let request = UNNotificationRequest(identifier: "timeSensitive_example", content: content, trigger: trigger)
+//        
+//        //Schedule Request
+//        UNUserNotificationCenter.current().add(request) { error in
+//            if let error = error {
+//                print(error)
+//            } else {
+//                print("Success!")
+//            }
+//        }
+//        
+//    }
+//    
+//    private func requestNotificationAuthorization() {
+//            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+//                DispatchQueue.main.async { notifOn = granted }
+//            }
+//        }
+//}
+//    
+//
+//#Preview {
+//    SettingView()
+//}
+//
+//
 import SwiftUI
 import UserNotifications
 
@@ -17,25 +166,16 @@ struct SettingView: View {
     @State private var notifOn: Bool = false
     
     var body: some View {
-//        ScrollView {
-            
         ZStack {
-            
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(hex: "F1F8E8"),
-                    Color(hex: "C9E9D2")
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-//            .ignoresSafeArea()
+            Color(hex: "F4FBF4")
+                .ignoresSafeArea()
         
-            VStack(alignment: .center, spacing: 30) {
+            VStack(alignment: .center, spacing: 24) {
                 
                 Text("個人化設定")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundColor(Color(hex: "303030"))
+                    .padding(.top, 24)
                 
                 Button(action: {
                     isShowingImagePicker = true
@@ -46,9 +186,10 @@ struct SettingView: View {
                         profileImage
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 120, height: 120)
+                            .frame(width: 100, height: 100)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.white, lineWidth: 3))
+                            .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
                         
                     } else {
                         Image(systemName: "person.circle.fill")
@@ -56,22 +197,22 @@ struct SettingView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                            .shadow(radius: 0.5)
+                            .foregroundColor(Color(hex: "53B175"))
+                            .overlay(Circle().stroke(Color.white, lineWidth: 3))
+                            .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
                     }
                 }
                 
-                
                 VStack(alignment: .leading, spacing: 12) {
-                        Text("General")
-                        .font(.footnote).foregroundStyle(.secondary)
+                    Text("General")
+                        .font(.system(size: 13))
+                        .foregroundColor(Color(hex: "8D8D8D"))
                         .padding(.leading, 4)
                     
                     SettingsCard {
                         SettingRow(systemIcon: "bell", title: "Notification", accessory: .toggle($notifOn))
                             .onChange(of: notifOn) { newValue in
                                 if newValue {
-                                    //把啟用推播功能加進來
                                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in if granted {
                                         DispatchQueue.main.asyncAfter(deadline: .now()+4) {
                                             self.weeklyNotification()
@@ -90,15 +231,12 @@ struct SettingView: View {
                             print("付款頁面")
                         }
                     }
-                    
-                    }
+                }
                 
                 Spacer(minLength: 24)
             }
             .frame(maxWidth: .infinity)
-            .padding()
-//            .background(Color(hex: "#D3ECCD"))
-            .cornerRadius(12)
+            .padding(.horizontal, 20)
             
             .sheet(isPresented: $isShowingImagePicker) {
                 ImagePicker(selectedImage: $selectedUIImage)
@@ -106,31 +244,25 @@ struct SettingView: View {
                         if let uiImage = selectedUIImage {
                             profileImage = Image(uiImage: uiImage)
                             
-                            // 存圖片到 UserDefaults
                             if let imageData = uiImage.jpegData(compressionQuality: 0.8) {
                                 UserDefaults.standard.set(imageData, forKey: "profileImageData")
+                            }
                         }
                     }
-                }
             }
         }
+        .navigationBarHidden(true)
     }
     
     func weeklyNotification() {
-        
-        //Content
         let content = UNMutableNotificationContent()
         content.title = "🌱Vegan小挑戰來囉！"
         content.body = "一點點改變，就是很棒的堅持！"
         content.interruptionLevel = .active
         
-        //Trigger
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        //Request
         let request = UNNotificationRequest(identifier: "timeSensitive_example", content: content, trigger: trigger)
         
-        //Schedule Request
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print(error)
@@ -138,19 +270,15 @@ struct SettingView: View {
                 print("Success!")
             }
         }
-        
     }
     
     private func requestNotificationAuthorization() {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
-                DispatchQueue.main.async { notifOn = granted }
-            }
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+            DispatchQueue.main.async { notifOn = granted }
         }
+    }
 }
-    
 
 #Preview {
     SettingView()
 }
-
-
