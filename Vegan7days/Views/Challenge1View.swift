@@ -97,6 +97,3 @@ struct Challenge1View: View {
     }
 }
 
-//#Preview {
-//    Challenge1View(index: 0, day: "踩點餐廳")
-//}
