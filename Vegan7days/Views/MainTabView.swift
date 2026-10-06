@@ -33,6 +33,7 @@ struct MainTabView: View {
                 Text("Settings")
                 }
         }
+        .preferredColorScheme(.light)
         .accentColor(Color(hex: "#253900"))
     }
 }
