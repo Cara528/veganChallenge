@@ -184,53 +184,62 @@ struct HomeView: View {
                     .background(Color(hex: "FFFFFF"))
                     .cornerRadius(16)
                     .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
-
+                    
                     // MARK: - 你的小盆栽
-                    HStack(alignment: .center, spacing: 12) {
-                        
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("你的小盆栽")
-                                .font(.system(size: 13, weight: .semibold))
-                                .foregroundColor(Color(hex: "8D8D8D"))
-                            
-                            HStack(spacing: 4) {
-                                Text(plantStageText)
-                                    .font(.system(size: 16, weight: .bold))
+                    HStack(alignment: .center, spacing: 16) {
+
+                        // 左邊圓形進度
+                        ZStack {
+                            Circle()
+                                .stroke(Color(hex: "E8E8E8"), lineWidth: 10)
+                                .frame(width: 100, height: 100)
+
+                            Circle()
+                                .trim(from: 0, to: CGFloat(completedCount) / CGFloat(missionStore.missionCompleted.count))
+                                .stroke(Color(hex: "53B175"), style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                                .rotationEffect(.degrees(-90))
+                                .frame(width: 100, height: 100)
+                                .animation(.easeInOut(duration: 0.6), value: completedCount)
+
+                            VStack(spacing: 2) {
+                                Text("\(Int(Double(completedCount) / Double(missionStore.missionCompleted.count) * 100))%")
+                                    .font(.system(size: 20, weight: .bold))
                                     .foregroundColor(Color(hex: "303030"))
-                                Text("🌱")
+                                Text("\(completedCount) / \(missionStore.missionCompleted.count)")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Color(hex: "8D8D8D"))
                             }
-                            
-                            // 進度條
-                            GeometryReader { geo in
-                                ZStack(alignment: .leading) {
-                                    RoundedRectangle(cornerRadius: 4)
-                                        .fill(Color(hex: "E8E8E8"))
-                                        .frame(height: 6)
-                                    
-                                    RoundedRectangle(cornerRadius: 4)
-                                        .fill(Color(hex: "53B175"))
-                                        .frame(width: geo.size.width * CGFloat(completedCount) / CGFloat(missionStore.missionCompleted.count), height: 6)
-                                }
-                            }
-                            .frame(height: 6)
-                            
-                            Text("再完成 \(remainingCount) 個任務就會長大囉！")
-                                .font(.system(size: 12))
-                                .foregroundColor(Color(hex: "8D8D8D"))
                         }
-                        
-                        Spacer()
-                        
-                        Image(plantImageName)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 80, height: 80)
+
+                        // 右邊
+                        VStack {
+                            Text(plantStageText)
+                                .font(.system(size: 13, weight: .semibold))
+                                .foregroundColor(Color(hex: "253900"))
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 5)
+                                .background(Color(hex: "53B175").opacity(0.15))
+                                .cornerRadius(8)
+
+                            Text("再完成 \(remainingCount) 個任務\n就會長大囉！")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(hex: "303030"))
+                                    .lineSpacing(3)
+
+//                                Spacer()
+
+                            Image(plantImageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 120, height: 120)
+                            
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                     .padding(16)
                     .background(Color.white)
                     .cornerRadius(16)
                     .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
-
                     
                     // MARK: - 本週進度
                     Text("本週進度")
