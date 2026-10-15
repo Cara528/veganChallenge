@@ -38,19 +38,6 @@ struct ChallengeView: View {
                             .foregroundColor(Color(hex: "303030"))
 
                         Spacer()
-                        
-                        NavigationLink {
-                            ProgressScreen(missionCompleted: $missionCompleted)
-                        } label: {
-                            Text("進度")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(Color(hex: "303030"))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                                .background(Color.white)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
-                        }
                     }
                     .padding(.top, 24)
                     .padding(.horizontal, 20)

@@ -16,21 +16,27 @@ struct MainTabView: View {
             HomeView(missionStore: missionStore)
                 .tabItem {
                 Image(systemName: "house.fill")
-                Text("Home")
+                Text("首頁")
                 }
             
-            ProgressScreen(missionCompleted: $missionStore.missionCompleted)
-            .tabItem { Label("Progress", systemImage: "chart.bar.fill") }
+//            ProgressScreen(missionCompleted: $missionStore.missionCompleted)
+//            .tabItem { Label("Progress", systemImage: "chart.bar.fill") }
             
             ChallengeView(missionCompleted: $missionStore.missionCompleted)      .tabItem {
                 Image(systemName: "list.bullet.rectangle")
-                Text("Challenges")
+                Text("進度")
+                }
+            
+            Text("挑戰即將推出")
+                .tabItem {
+                    Image(systemName: "list.bullet.rectangle")
+                    Text("挑戰")
                 }
             
             SettingView()
             .tabItem {
                 Image(systemName: "gearshape.fill")
-                Text("Settings")
+                Text("設定")
                 }
         }
         .preferredColorScheme(.light)
