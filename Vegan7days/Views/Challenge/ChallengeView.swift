@@ -13,6 +13,8 @@ struct ChallengeView: View {
     
     @Binding var missionCompleted: [Bool]
     
+    var onSelectMission: (Int) -> Void = { _ in }
+    
     let missions: [String: String] = [
         "Day1":"踩點餐廳",
         "Day2":"邀請朋友吃素",
@@ -46,34 +48,36 @@ struct ChallengeView: View {
                         VStack(spacing: 16) {
                             ForEach(Array(pairs.enumerated()), id: \.element.key) { index, pair in
 
-                                NavigationLink(destination: Challenge1View(day: pair.value, index: index)) {
-                                    VStack(alignment: .leading, spacing: 16) {
-                                        Text("Day \(index + 1)")
-                                            .font(.system(size: 13, weight: .semibold))
-                                            .foregroundColor(Color(hex: "53B175"))
-                                        
-                                        HStack {
-                                            Text(pair.value)
-                                                .font(.system(size: 17, weight: .medium))
-                                                .foregroundColor(Color(hex: "303030"))
-                                                
-                                            Spacer()
-                                                
-                                            Button(action: {
-                                                missionCompleted[index].toggle()
-                                            }) {
-                                                Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
-                                                    .font(.title3)
-                                                    .foregroundColor(missionCompleted[index] ? Color(hex: "53B175") : Color(hex: "8D8D8D"))
-                                            }
+                                VStack(alignment: .leading, spacing: 16) {
+                                    Text("Day \(index + 1)")
+                                        .font(.system(size: 13, weight: .semibold))
+                                        .foregroundColor(Color(hex: "53B175"))
+
+                                    HStack {
+                                        Text(pair.value)
+                                            .font(.system(size: 17, weight: .medium))
+                                            .foregroundColor(Color(hex: "303030"))
+
+                                        Spacer()
+
+                                        Button(action: {
+                                            missionCompleted[index].toggle()
+                                        }) {
+                                            Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
+                                                .font(.title3)
+                                                .foregroundColor(missionCompleted[index] ? Color(hex: "53B175") : Color(hex: "8D8D8D"))
                                         }
                                         .buttonStyle(PlainButtonStyle())
                                     }
-                                    .padding(16)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(Color.white)
-                                    .cornerRadius(16)
-                                    .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+                                }
+                                .padding(16)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(Color.white)
+                                .cornerRadius(16)
+                                .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    onSelectMission(index)
                                 }
                             }
                         }
