@@ -53,6 +53,8 @@ struct HomeView: View {
         }
     }
     
+    private let circleSize: CGFloat = 140
+    
     private var plantStageText: String {
         switch completedCount {
         case 0...2:
@@ -80,7 +82,6 @@ struct HomeView: View {
                                 .foregroundColor(Color(hex: "8D8D8D"))
 
                             HStack(spacing: 6) {
-                                Text("🌱")
                                 Text("Vegan 挑戰第 \(currentDay) 天")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(Color(hex: "303030"))
@@ -186,55 +187,101 @@ struct HomeView: View {
                     .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
                     
                     // MARK: - 你的小盆栽
-                    HStack(alignment: .center, spacing: 16) {
+                    HStack(alignment: .center, spacing: 12) {
 
-                        // 左邊圓形進度
+                        // 左邊：圓形進度
                         ZStack {
                             Circle()
-                                .stroke(Color(hex: "E8E8E8"), lineWidth: 10)
-                                .frame(width: 100, height: 100)
+                                .stroke(Color(hex: "E8E8E8"), lineWidth: 12)
 
                             Circle()
                                 .trim(from: 0, to: CGFloat(completedCount) / CGFloat(missionStore.missionCompleted.count))
-                                .stroke(Color(hex: "53B175"), style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                                .stroke(Color(hex: "53B175"), style: StrokeStyle(lineWidth: 12, lineCap: .round))
                                 .rotationEffect(.degrees(-90))
-                                .frame(width: 100, height: 100)
                                 .animation(.easeInOut(duration: 0.6), value: completedCount)
 
-                            VStack(spacing: 2) {
-                                Text("\(Int(Double(completedCount) / Double(missionStore.missionCompleted.count) * 100))%")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color(hex: "303030"))
+                            VStack(spacing: 4) {
+                                HStack(alignment: .firstTextBaseline, spacing: 1) {
+                                    Text("\(Int(Double(completedCount) / Double(missionStore.missionCompleted.count) * 100))")
+                                        .font(.system(size: 30, weight: .bold))
+                                    Text("%")
+                                        .font(.system(size: 16, weight: .medium))
+                                }
+                                .foregroundColor(Color(hex: "303030"))
+
                                 Text("\(completedCount) / \(missionStore.missionCompleted.count)")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(Color(hex: "8D8D8D"))
+                                    .font(.system(size: 13))
+                                    .foregroundColor(Color(hex: "303030"))
+
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(Color(hex: "53B175"))
                             }
                         }
+                        .frame(width: circleSize, height: circleSize)
+                        
+                        //右邊：說明框在上、盆栽在下，盆栽可稍微疊到框的下緣
+                        ZStack {
+                            // 盆栽（先畫，在底層）
+                            VStack {
+                                Spacer(minLength: 0)
+                                Image(plantImageName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: circleSize * 0.62)
+                            }
 
-                        // 右邊
-                        VStack {
-                            Text(plantStageText)
-                                .font(.system(size: 13, weight: .semibold))
-                                .foregroundColor(Color(hex: "253900"))
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 5)
-                                .background(Color(hex: "53B175").opacity(0.15))
-                                .cornerRadius(8)
+                            // 說明框（後畫，疊在上面）
+                            VStack {
+                                VStack(spacing: 4) {
+                                    Text(plantStageText)
+                                        .font(.system(size: 14, weight: .bold))
+                                        .foregroundColor(Color(hex: "303030"))
 
-                            Text("再完成 \(remainingCount) 個任務\n就會長大囉！")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Color(hex: "303030"))
-                                    .lineSpacing(3)
+                                    Text(remainingCount == 0 ? "挑戰完成，太棒了！" : "再完成 \(remainingCount) 個任務\n就會長大囉！")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(Color(hex: "303030"))
+                                        .multilineTextAlignment(.center)
+                                }
+                                .minimumScaleFactor(0.8)
+                                .frame(width: 124, height: circleSize * 0.42)
+                                .background(Color(hex: "53B175").opacity(0.12))
+                                .cornerRadius(12)
 
-//                                Spacer()
-
-                            Image(plantImageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 120, height: 120)
-                            
+                                Spacer(minLength: 0)
+                            }
                         }
                         .frame(maxWidth: .infinity)
+                        .frame(height: circleSize)
+
+                        // 右邊：上下各半個圓的高度
+//                        VStack(spacing: 8) {
+//
+//                            // 上半：說明框
+//                            VStack(spacing: 4) {
+//                                Text(plantStageText)
+//                                    .font(.system(size: 14, weight: .bold))
+//                                    .foregroundColor(Color(hex: "303030"))
+//
+//                                Text(remainingCount == 0 ? "挑戰完成，太棒了！" : "再完成 \(remainingCount) 個任務\n就會長大囉！")
+//                                    .font(.system(size: 12))
+//                                    .foregroundColor(Color(hex: "303030"))
+//                                    .multilineTextAlignment(.center)
+//                            }
+//                            .minimumScaleFactor(0.8)
+//                            .frame(maxWidth: .infinity)
+//                            .frame(height: (circleSize - 8) / 2)
+//                            .background(Color(hex: "53B175").opacity(0.12))
+//                            .cornerRadius(12)
+//
+//                            // 下半：植物圖
+//                            Image(plantImageName)
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(maxWidth: .infinity)
+//                                .frame(height: (circleSize - 8) / 2)
+//                        }
+                        .frame(height: circleSize)
                     }
                     .padding(16)
                     .background(Color.white)
