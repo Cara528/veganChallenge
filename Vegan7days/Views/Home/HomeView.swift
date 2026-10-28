@@ -254,85 +254,13 @@ struct HomeView: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: circleSize)
 
-                        // 右邊：上下各半個圓的高度
-//                        VStack(spacing: 8) {
-//
-//                            // 上半：說明框
-//                            VStack(spacing: 4) {
-//                                Text(plantStageText)
-//                                    .font(.system(size: 14, weight: .bold))
-//                                    .foregroundColor(Color(hex: "303030"))
-//
-//                                Text(remainingCount == 0 ? "挑戰完成，太棒了！" : "再完成 \(remainingCount) 個任務\n就會長大囉！")
-//                                    .font(.system(size: 12))
-//                                    .foregroundColor(Color(hex: "303030"))
-//                                    .multilineTextAlignment(.center)
-//                            }
-//                            .minimumScaleFactor(0.8)
-//                            .frame(maxWidth: .infinity)
-//                            .frame(height: (circleSize - 8) / 2)
-//                            .background(Color(hex: "53B175").opacity(0.12))
-//                            .cornerRadius(12)
-//
-//                            // 下半：植物圖
-//                            Image(plantImageName)
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(maxWidth: .infinity)
-//                                .frame(height: (circleSize - 8) / 2)
-//                        }
+
                         .frame(height: circleSize)
                     }
                     .padding(16)
                     .background(Color.white)
                     .cornerRadius(16)
                     .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
-                    
-//                    // MARK: - 本週進度
-//                    Text("本週進度")
-//                        .font(.system(size: 17, weight: .bold))
-//                        .foregroundColor(Color(hex: "303030"))
-//
-//                    HStack(spacing: 0) {
-//                        VStack(spacing: 6) {
-//                            Text("\(completedCount)")
-//                                .font(.system(size: 28, weight: .bold))
-//                                .foregroundColor(Color(hex: "53B175"))
-//                            Text("已完成")
-//                                .font(.system(size: 12))
-//                                .foregroundColor(Color(hex: "8D8D8D"))
-//                        }
-//                        .frame(maxWidth: .infinity)
-//
-//                        Divider().frame(height: 36)
-//
-//                        VStack(spacing: 6) {
-//                            Text("\(remainingCount)")
-//                                .font(.system(size: 28, weight: .bold))
-//                                .foregroundColor(Color(hex: "303030"))
-//                            Text("剩餘任務")
-//                                .font(.system(size: 12))
-//                                .foregroundColor(Color(hex: "8D8D8D"))
-//                        }
-//                        .frame(maxWidth: .infinity)
-//
-//                        Divider().frame(height: 36)
-//
-//                        VStack(spacing: 6) {
-//                            Text("\(missionStore.missionCompleted.count)")
-//                                .font(.system(size: 28, weight: .bold))
-//                                .foregroundColor(Color(hex: "303030"))
-//                            Text("總任務數")
-//                                .font(.system(size: 12))
-//                                .foregroundColor(Color(hex: "8D8D8D"))
-//                        }
-//                        .frame(maxWidth: .infinity)
-//                    }
-//                    .padding(16)
-//                    .background(Color.white)
-//                    .cornerRadius(16)
-//                    .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
-
                     // MARK: - 激勵文字
                     ZStack(alignment: .trailing) {
                         Image("bg_earth")

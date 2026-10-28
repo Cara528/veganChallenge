@@ -15,6 +15,16 @@ struct ChallengeView: View {
     
     var onSelectMission: (Int) -> Void = { _ in }
     
+    private let dayIcons: [String] = [
+        "icon_plant",
+        "icon_progress",
+        "icon_food",
+        "icon_travel",
+        "icon_settings",
+        "icon_scan",
+        "icon_challenges"
+    ]
+    
     let missions: [String: String] = [
         "Day1":"踩點餐廳",
         "Day2":"邀請朋友吃素",
@@ -48,26 +58,33 @@ struct ChallengeView: View {
                         VStack(spacing: 16) {
                             ForEach(Array(pairs.enumerated()), id: \.element.key) { index, pair in
 
-                                VStack(alignment: .leading, spacing: 16) {
-                                    Text("Day \(index + 1)")
-                                        .font(.system(size: 13, weight: .semibold))
-                                        .foregroundColor(Color(hex: "53B175"))
+                                HStack(spacing: 12) {
+                                    Image(dayIcons[index])
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 56, height: 56)
 
-                                    HStack {
-                                        Text(pair.value)
-                                            .font(.system(size: 17, weight: .medium))
-                                            .foregroundColor(Color(hex: "303030"))
+                                    VStack(alignment: .leading, spacing: 16) {
+                                        Text("Day \(index + 1)")
+                                            .font(.system(size: 13, weight: .semibold))
+                                            .foregroundColor(Color(hex: "53B175"))
 
-                                        Spacer()
+                                        HStack {
+                                            Text(pair.value)
+                                                .font(.system(size: 17, weight: .medium))
+                                                .foregroundColor(Color(hex: "303030"))
 
-                                        Button(action: {
-                                            missionCompleted[index].toggle()
-                                        }) {
-                                            Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
-                                                .font(.title3)
-                                                .foregroundColor(missionCompleted[index] ? Color(hex: "53B175") : Color(hex: "8D8D8D"))
+                                            Spacer()
+
+                                            Button(action: {
+                                                missionCompleted[index].toggle()
+                                            }) {
+                                                Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
+                                                    .font(.title3)
+                                                    .foregroundColor(missionCompleted[index] ? Color(hex: "53B175") : Color(hex: "8D8D8D"))
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
                                         }
-                                        .buttonStyle(PlainButtonStyle())
                                     }
                                 }
                                 .padding(16)
