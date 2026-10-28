@@ -91,35 +91,100 @@ struct Challenge1View: View {
                 .frame(height: 320)
                 .clipped()
                 
-                //                Text("Day \(index + 1) 挑戰")
-                //                    .font(.title).bold()
-                //                    .frame(maxWidth: .infinity, alignment: .leading)
-                //                    .padding(.horizontal, 16)
+           
+                HStack(alignment: .center, spacing: 14) {
+                    ZStack {
+                        Circle()
+                            .fill(Color(hex: "E6F3E6"))
+                            .frame(width: 48, height: 48)
+
+                        Image(systemName: "leaf.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color(hex: "53B175"))
+                    }
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("今天的任務")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(Color(hex: "53B175"))
+
+                        Text(getChallengeContent(for: day))
+                            .font(.system(size: 16))
+                            .foregroundColor(Color(hex: "303030"))
+                            .lineSpacing(4)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
+                    Spacer(minLength: 0)
+                }
+                .padding(16)
+                .background(Color.white)
+                .cornerRadius(16)
+                .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+                .padding(.horizontal, 16)
                 
-                //                GeometryReader { geo in
-                //                    let width = geo.size.width - 32
-                //                    let height = max(220, width * 0.55)
-                //
-                //                    Image("vegan_restaurant")
-                //                        .resizable()
-                //                        .scaledToFill()
-                //                        .frame(width: width, height: height)
-                //                        .clipShape(RoundedRectangle(cornerRadius: 25))
-                //                        .shadow(radius: 3)
-                //                        .padding(.horizontal, 16)
-                //                }
-                //                .frame(height: 260)
+                if !getMissionDetail(for: day).intro.isEmpty {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("任務說明")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(Color(hex: "303030"))
+
+                        Text(getMissionDetail(for: day).intro)
+                            .font(.system(size: 16))
+                            .foregroundColor(Color(hex: "303030"))
+                            .lineSpacing(4)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            ForEach(getMissionDetail(for: day).tips, id: \.self) { tip in
+                                HStack(alignment: .top, spacing: 8) {
+                                    Text("•")
+                                    Text(tip)
+                                }
+                                .font(.system(size: 16))
+                                .foregroundColor(Color(hex: "303030"))
+                            }
+                        }
+                        
+                        if let reminder = getMissionReminder(for: day) {
+                            HStack(alignment: .top, spacing: 12) {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color(hex: "D4EBD4"))
+                                        .frame(width: 36, height: 36)
+
+                                    Image(systemName: "lightbulb.fill")
+                                        .font(.system(size: 16))
+                                        .foregroundColor(Color(hex: "53B175"))
+                                }
+
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text("小提醒")
+                                        .font(.system(size: 15, weight: .semibold))
+                                        .foregroundColor(Color(hex: "3A7A3A"))
+
+                                    Text(reminder)
+                                        .font(.system(size: 15))
+                                        .foregroundColor(Color(hex: "303030"))
+                                        .lineSpacing(4)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                            .padding(14)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color(hex: "EEF7EE"))
+                            .cornerRadius(14)
+                        }
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.white)
+                    .cornerRadius(16)
+                    .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+                    .padding(.horizontal, 16)
+                }
                 
-                //                Text(day)
-                //                    .font(.title).bold()
-                //                    .frame(maxWidth: .infinity, alignment: .leading)
-                //                    .padding(.horizontal, 16)
-                
-                Text(getChallengeContent(for: day))
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal, 20)
+
                 
                 Button {
                     print("Done!")
@@ -141,12 +206,27 @@ struct Challenge1View: View {
             }
             .padding(.bottom, 24)
         }
-        //        .toolbar {
-        //            ToolbarItem(placement: .navigationBarLeading) {
-        //                Button { dismiss() } label: { Image(systemName: "chevron.left") }
-        //            }
-        //        }
-        //        .navigationBarBackButtonHidden(true)
+    }
+    
+    func getMissionDetail(for day: String) -> (intro: String, tips: [String]) {
+        switch day {
+        case "踩點餐廳":
+            return (
+                "試著在附近的餐廳、咖啡廳或熟食店，尋找有提供 Vegan 選項的餐點。你可以：",
+                ["先看看菜單上有沒有標示 Vegan", "詢問店員是否能客製成全植物餐點"]
+            )
+        default:
+            return ("", [])
+        }
+    }
+    
+    func getMissionReminder(for day: String) -> String? {
+        switch day {
+        case "踩點餐廳":
+            return "有些餐廳會標示「全素」、「純素」或「Vegan」，也可以主動詢問店員喔！"
+        default:
+            return nil
+        }
     }
     
     func getChallengeContent(for day: String) -> String {
@@ -156,7 +236,7 @@ struct Challenge1View: View {
         case "邀請朋友吃素":
             return "邀請1位朋友or家人，一起去Vegan或素食餐廳吃飯"
         case "連鎖店找一款無動實產品":
-            return "到連鎖超市、商店尋找一款無動物實驗及成分的生活用品..."
+            return "到連鎖超市、商店尋找一款無動物實驗及成分的生活用品"
         case "情境模擬練習：買新鞋":
             return "假設要購買一雙新的皮鞋..."
         case "情境模擬練習：好友過生日":
