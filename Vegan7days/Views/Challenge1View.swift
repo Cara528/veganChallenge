@@ -122,7 +122,7 @@ struct Challenge1View: View {
                 .cornerRadius(16)
                 .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
                 .padding(.horizontal, 16)
-                
+
                 if !getMissionDetail(for: day).intro.isEmpty {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("任務說明")
@@ -145,7 +145,7 @@ struct Challenge1View: View {
                                 .foregroundColor(Color(hex: "303030"))
                             }
                         }
-                        
+
                         if let reminder = getMissionReminder(for: day) {
                             HStack(alignment: .top, spacing: 12) {
                                 ZStack {
@@ -175,6 +175,47 @@ struct Challenge1View: View {
                             .background(Color(hex: "EEF7EE"))
                             .cornerRadius(14)
                         }
+
+                        if !getRecommendedTools(for: day).isEmpty {
+                            Divider()
+
+                            Text("推薦工具")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundColor(Color(hex: "303030"))
+
+                            HStack(spacing: 10) {
+                                ForEach(getRecommendedTools(for: day)) { tool in
+                                    HStack(spacing: 10) {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color(hex: "F2F2F2"))
+                                            .frame(width: 40, height: 40)
+                                            .overlay(
+                                                Image(systemName: tool.symbol)
+                                                    .foregroundColor(Color(hex: "53B175"))
+                                            )
+
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text(tool.name)
+                                                .font(.system(size: 14, weight: .semibold))
+                                                .foregroundColor(Color(hex: "303030"))
+                                            Text(tool.desc)
+                                                .font(.system(size: 12))
+                                                .foregroundColor(Color(hex: "8D8D8D"))
+                                                .lineLimit(1)
+                                                .minimumScaleFactor(0.8)
+                                        }
+                                    }
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color.white)
+                                    .cornerRadius(12)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color(hex: "E8E8E8"))
+                                    )
+                                }
+                            }
+                        }
                     }
                     .padding(16)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -183,8 +224,6 @@ struct Challenge1View: View {
                     .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
                     .padding(.horizontal, 16)
                 }
-                
-
                 
                 Button {
                     print("Done!")
@@ -229,6 +268,18 @@ struct Challenge1View: View {
         }
     }
     
+    func getRecommendedTools(for day: String) -> [RecommendedTool] {
+        switch day {
+        case "踩點餐廳":
+            return [
+                RecommendedTool(name: "HappyCow", desc: "尋找附近 Vegan 餐廳", symbol: "pawprint.fill"),
+                RecommendedTool(name: "地圖", desc: "搜尋周邊餐廳", symbol: "map.fill")
+            ]
+        default:
+            return []
+        }
+    }
+    
     func getChallengeContent(for day: String) -> String {
         switch day {
         case "踩點餐廳":
@@ -250,4 +301,11 @@ struct Challenge1View: View {
         }
     }
     
+}
+
+struct RecommendedTool: Identifiable {
+    let id = UUID()
+    let name: String
+    let desc: String
+    let symbol: String
 }
