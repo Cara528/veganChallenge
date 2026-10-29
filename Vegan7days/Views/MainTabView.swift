@@ -11,7 +11,7 @@ struct MainTabView: View {
     @StateObject private var missionStore = MissionStore()
     
     // 目前選中的 tab：0 首頁、1 進度、2 挑戰、3 設定
-    @State private var selectedTab = 1
+    @State private var selectedTab = 0
     // 從任務清單點進來的那一天；nil 代表顯示今天
     @State private var selectedChallengeIndex: Int? = nil
     
@@ -45,7 +45,7 @@ struct MainTabView: View {
                 }
                 .tag(0)
             
-            ChallengeView(
+            ProgressView(
                 missionCompleted: $missionStore.missionCompleted,
                 onSelectMission: { index in
                     selectedChallengeIndex = index
@@ -59,7 +59,7 @@ struct MainTabView: View {
             .tag(1)
             
             NavigationStack {
-                Challenge1View(day: challengeTitles[displayedIndex], index: displayedIndex)
+                ChallengeView(day: challengeTitles[displayedIndex], index: displayedIndex)
                     .id(displayedIndex)
             }
             .tabItem {
