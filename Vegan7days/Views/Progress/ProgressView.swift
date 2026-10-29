@@ -2,43 +2,112 @@
 //  Untitled.swift
 //  Vegan7days
 //
-//  Created by Cara Hsu on 2025/2/21.
-//
-//
+//  Created by Cara Hsu on 2025/6/12.
 //
 //
 //
 
 import SwiftUI
 
-struct ProgressCircleView: View {
-    let progress: Double
-
+struct ProgressView: View {
+    
+    @Binding var missionCompleted: [Bool]
+    
+    var onSelectMission: (Int) -> Void = { _ in }
+    
+    private let dayIcons: [String] = [
+        "icon_plant",
+        "icon_progress",
+        "icon_food",
+        "icon_travel",
+        "icon_settings",
+        "icon_scan",
+        "icon_challenges"
+    ]
+    
+    let missions: [String: String] = [
+        "Day1":"踩點餐廳",
+        "Day2":"邀請朋友吃素",
+        "Day3":"連鎖店找一款無動實產品",
+        "Day4":"情境模擬練習：買新鞋",
+        "Day5":"情境模擬練習：好友過生日",
+        "Day6":"問答題：關於B12",
+        "Day7":"心得打卡"]
+    
+    var pairs: [(key: String, value: String)] { missions.sorted { $0.key.localizedStandardCompare($1.key) == .orderedAscending }}
+    
     var body: some View {
-        ZStack {
-            Circle()
-                .stroke(Color.gray.opacity(0.2), lineWidth: 12)
-                .frame(width: 160, height: 160)
+        
+        NavigationStack {
+            ZStack {
+                Color(hex: "F4FBF4")
+                    .ignoresSafeArea()
+                
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("任務清單")
+                            .font(.system(size: 22, weight: .bold))
+                            .foregroundColor(Color(hex: "303030"))
 
-            Circle()
-                .trim(from: 0, to: progress)
-                .stroke(Color(hex: "53B175"), style: StrokeStyle(lineWidth: 12, lineCap: .round))
-                .rotationEffect(.degrees(-90))
-                .animation(.easeInOut(duration: 0.6), value: progress)
-                .frame(width: 160, height: 160)
+                        Spacer()
+                    }
+                    .padding(.top, 24)
+                    .padding(.horizontal, 20)
+                        
+                    ScrollView {
+                        VStack(spacing: 16) {
+                            ForEach(Array(pairs.enumerated()), id: \.element.key) { index, pair in
 
-            VStack {
-                Text("\(Int(progress * 100))%")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(Color(hex: "303030"))
-                Text("完成度")
-                    .font(.system(size: 14))
-                    .foregroundColor(Color(hex: "8D8D8D"))
+                                HStack(spacing: 12) {
+                                    Image(dayIcons[index])
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 56, height: 56)
+
+                                    VStack(alignment: .leading, spacing: 16) {
+                                        Text("Day \(index + 1)")
+                                            .font(.system(size: 13, weight: .semibold))
+                                            .foregroundColor(Color(hex: "53B175"))
+
+                                        HStack {
+                                            Text(pair.value)
+                                                .font(.system(size: 17, weight: .medium))
+                                                .foregroundColor(Color(hex: "303030"))
+
+                                            Spacer()
+
+                                            Button(action: {
+                                                missionCompleted[index].toggle()
+                                            }) {
+                                                Image(systemName: missionCompleted[index] ? "checkmark.circle.fill" : "circle")
+                                                    .font(.title3)
+                                                    .foregroundColor(missionCompleted[index] ? Color(hex: "53B175") : Color(hex: "8D8D8D"))
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
+                                        }
+                                    }
+                                }
+                                .padding(16)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(Color.white)
+                                .cornerRadius(16)
+                                .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    onSelectMission(index)
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 32)
+                    }
+                }
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
-        .background(Color.white)
-        .cornerRadius(16)
+        .navigationBarHidden(true)
     }
+}
+
+#Preview {
+    ProgressView(missionCompleted: .constant(Array(repeating: false, count: 7)))
 }
