@@ -27,7 +27,7 @@ struct ProgressView: View {
     
     let missions: [String: String] = [
         "Day1":"發現 Vegan 料理",
-        "Day2":"邀請朋友吃素",
+        "Day2":"認識 Vegan 創作者",
         "Day3":"連鎖店找一款無動實產品",
         "Day4":"情境模擬練習：買新鞋",
         "Day5":"情境模擬練習：好友過生日",

@@ -17,7 +17,7 @@ struct MainTabView: View {
     
     private let challengeTitles: [String] = [
         "發現 Vegan 料理",
-        "邀請朋友吃素",
+        "認識 Vegan 創作者",
         "連鎖店找一款無動實產品",
         "情境模擬練習：買新鞋",
         "情境模擬練習：好友過生日",
