@@ -4,7 +4,7 @@ struct HomeView: View {
     @ObservedObject var missionStore: MissionStore
     
     private let missionTitles: [String] = [
-        "邀請朋友到素食餐廳",
+        "外食找一道 Vegan 餐點",
         "踩點一間 Vegan 餐廳",
         "找一款無動物實驗的產品",
         "情境模擬練習：買新鞋",
@@ -14,7 +14,7 @@ struct HomeView: View {
     ]
     
     private let missionDescriptions: [String] = [
-        "找一家提供 Vegan 選擇的餐廳，開始你的植物性探索吧！",
+        "找一家提供 Vegan 餐點的店面，開始探索你的維根之旅吧！",
         "邀請一位朋友一起體驗素食，分享你的 Vegan 旅程。",
         "在連鎖店找一款無動物成分的生活用品，試試看！",
         "練習在買鞋時選擇非皮革材質，為動物發聲。",
@@ -79,7 +79,7 @@ struct HomeView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("早安，Cara 🌱")
                                 .font(.system(size: 15, weight: .regular))
-                                .foregroundColor(Color(hex: "8D8D8D"))
+                                .foregroundColor(Color(hex: "303030"))
 
                             HStack(spacing: 6) {
                                 Text("Vegan 挑戰第 \(currentDay) 天")
@@ -145,12 +145,9 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: 12) {
 
                         Text("今日任務")
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(Color(hex: "253900"))
-                            .padding(.horizontal, 10)
                             .padding(.vertical, 4)
-                            .background(Color(hex: "253900").opacity(0.1))
-                            .cornerRadius(8)
 
                         Text(missionTitles[currentIndex])
                             .font(.system(size: 24, weight: .bold))

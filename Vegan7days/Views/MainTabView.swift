@@ -16,7 +16,7 @@ struct MainTabView: View {
     @State private var selectedChallengeIndex: Int? = nil
     
     private let challengeTitles: [String] = [
-        "踩點餐廳",
+        "發現 Vegan 料理",
         "邀請朋友吃素",
         "連鎖店找一款無動實產品",
         "情境模擬練習：買新鞋",

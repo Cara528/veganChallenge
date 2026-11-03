@@ -249,9 +249,9 @@ struct ChallengeView: View {
 
     func getMissionDetail(for day: String) -> (intro: String, tips: [String]) {
         switch day {
-        case "踩點餐廳":
+        case "發現 Vegan 料理":
             return (
-                "試著在附近的餐廳、咖啡廳或熟食店，尋找有提供 Vegan 選項的餐點。你可以：",
+                "試著在附近的餐廳、熟食店或便利商店，尋找有提供 Vegan 選項的餐點。你可以：",
                 ["先看看菜單上有沒有標示 Vegan", "詢問店員是否能客製成全植物餐點"]
             )
         case "邀請朋友吃素":
@@ -315,7 +315,7 @@ struct ChallengeView: View {
 
     func getMissionReminder(for day: String) -> String? {
         switch day {
-        case "踩點餐廳":
+        case "發現 Vegan 料理":
             return "有些餐廳會標示「全素」、「純素」或「Vegan」，也可以主動詢問店員喔！"
         case "邀請朋友吃素":
             return "邀請時以分享和體驗為主，不需要要求朋友改變飲食習慣。一次愉快的用餐，也能讓更多人認識 Vegan。"
@@ -336,7 +336,7 @@ struct ChallengeView: View {
 
     func getRecommendedTools(for day: String) -> [RecommendedTool] {
         switch day {
-        case "踩點餐廳":
+        case "發現 Vegan 料理":
             return [
                 RecommendedTool(name: "HappyCow", desc: "尋找附近 Vegan 餐廳", symbol: "pawprint.fill"),
                 RecommendedTool(name: "地圖", desc: "搜尋周邊餐廳", symbol: "map.fill")
@@ -348,8 +348,8 @@ struct ChallengeView: View {
 
     func getChallengeContent(for day: String) -> String {
         switch day {
-        case "踩點餐廳":
-            return "踩點一間沒去過的Vegan餐廳，去吃個晚餐吧！"
+        case "發現 Vegan 料理":
+            return "找一家提供 Vegan 餐點的店面，開始探索你的維根之旅吧！"
         case "邀請朋友吃素":
             return "邀請1位朋友or家人，一起去Vegan或素食餐廳吃飯"
         case "連鎖店找一款無動實產品":
